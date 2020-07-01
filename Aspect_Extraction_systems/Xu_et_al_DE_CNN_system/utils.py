@@ -79,13 +79,9 @@ def training_data (general_embed_model, custom_embed_model, dataframe_series, la
     X_train = np.concatenate((x_domain_train, x_train), axis=2)
     x_valid = X_train[:,31684:,:]
     X = X_train[:,:31684,:]
-    # print('shape: xvalid :', x_valid.shape)
-    # print('shape: X :', X.shape)
     y_valid = y_train[:,31684:,:]
     y = y_train[:,:31684,:]
-    # print('shape: y_valid :', y_valid.shape)
-    # print('shape: y :', y.shape)
-    return X, x_valid, y_train, y_valid
+    return X, x_valid, y, y_valid
 
 def test_data (general_embed_model, custom_embed_model, gold_series, gold_label_series):
     """[summary]
@@ -107,8 +103,7 @@ def test_data (general_embed_model, custom_embed_model, gold_series, gold_label_
     x_domain_test = np.array(domain_test)
     x_domain_test= np.reshape(x_domain_test, (1, x_domain_test.shape[0], x_domain_test.shape[1]))
     X_test = np.concatenate((x_domain_test, x_test), axis=2)
-    # print ('X_test.shape: ', X_test.shape)
-    return X_test,label_index
+    return X_test, label_index
 
 def run_cnn (X_train, y_train, X_valid, y_valid, embedding_dims, batch_size,
              kernel_size, epochs, verbose = False):
@@ -129,12 +124,13 @@ def run_cnn (X_train, y_train, X_valid, y_valid, embedding_dims, batch_size,
         [type]: [description]
     """
     model = Sequential()
-    model.add(Conv1D(filters = 128, kernel_size = kernel_size,padding='same', activation='relu',strides=1,input_shape = (None, embedding_dims)))
+    model.add(Conv1D(filters = 128, kernel_size = kernel_size,padding='same',
+                    activation='relu',strides=1,input_shape = (None, embedding_dims)))
     model.add(Dropout(0.55,))
-    model.add(Conv1D(filters = 128, kernel_size = kernel_size, padding='same', activation='relu'))
+    model.add(Conv1D(filters = 128, kernel_size = kernel_size, padding='same', 
+                    activation='relu'))
     model.add(Conv1D(filters = 256, kernel_size = kernel_size, padding='same'))
     model.add(Conv1D(filters = 256, kernel_size = kernel_size, padding='same'))
-    # model.add(Conv1D(filters = 256, kernel_size = kernel_size, padding='same'))
     model.add(Dense(units=3, activation='softmax'))
     if verbose == True:
         model.summary()
@@ -142,7 +138,7 @@ def run_cnn (X_train, y_train, X_valid, y_valid, embedding_dims, batch_size,
     model.fit(X_train, y_train, batch_size=batch_size, epochs=epochs, validation_data = (X_valid, y_valid), verbose = verbose)
     return model
 
-def predict (model, df_test, label_index):
+def predict (model, X_test, df_test, label_index):
     """[summary]
 
     Args:
