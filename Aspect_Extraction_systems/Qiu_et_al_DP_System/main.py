@@ -29,15 +29,16 @@ def main ():
         pass
     else:
         path_neg = input_path_neg
-    print(path_pos, '\n', path_neg)
+    # populate seed opinion set and create aspect set
     O, F = initialise_lexicon(path_pos, path_neg)
+    # run DP algorithm
     features_out_dict = algorithm (df_gold_lists, F, O)
+    # convert phrase terms and prepare for prediction
     system_predictions = post_process(features_out_dict, df_test)
+    # predict
     predict(df_test, system_predictions)
 
     
-
-
 if __name__ == "__main__":
     main()
 
