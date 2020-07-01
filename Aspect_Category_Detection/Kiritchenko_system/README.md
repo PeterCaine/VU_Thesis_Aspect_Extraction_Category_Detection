@@ -1,6 +1,6 @@
 # README
 
-based on Kiritchenko et al.'s (2014) system 
+Based on Kiritchenko et al.'s (2014) system 
 
 uses features:
 unigrams-grams, binary n-grams, char-grams (n=4), stemmed words (Porter stermmer), Lexicon features (Yelp Restaurant Word–Aspect Association Lexicon), 
