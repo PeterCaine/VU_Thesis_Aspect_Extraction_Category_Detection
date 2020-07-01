@@ -35,7 +35,6 @@ def main (verbose = False):
     # run DE_CNN NN
     batch_size = 128
     embedding_dims = X_train.shape[2]
-    print (embedding_dims)
     kernel_size = 5
     epochs = 200
     model = run_cnn(X_train, y_train, X_valid, y_valid, embedding_dims = embedding_dims,

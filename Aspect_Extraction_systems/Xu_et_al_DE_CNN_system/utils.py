@@ -56,16 +56,18 @@ def labels_to_categorical (dataframe_series):
     return Y_label, label2Idx
 
 def training_data (general_embed_model, custom_embed_model, dataframe_series, label_series):
-    """[summary]
+    """converts text (CoNLL formatted) and swaps out words for either w2v embeddings or
+    zeroes (OOV); does the same with a custom embeddings; concatenates; reshapes for 
+    entry to CNN and splits into train + valid
 
     Args:
-        general_embed_model ([type]): [description]
-        custom_embed_model ([type]): [description]
-        dataframe_series ([type]): [description]
-        label_series ([type]): [description]
+        general_embed_model (embeddings model): Word2vec 300dim
+        custom_embed_model (embeddings model): Xu et al.'s in domain 100dim
+        dataframe_series (Series): df_train['word']
+        label_series (Series): df_train['label'] 
 
     Returns:
-        [type]: [description]
+        [tensor]: 4 X 3-dim X_train, X_valid, y_train, y_valid 
     """
     embeddings = embed_swap (general_embed_model, dataframe_series)
     x_train = np.array(embeddings)
@@ -84,13 +86,15 @@ def training_data (general_embed_model, custom_embed_model, dataframe_series, la
     return X, x_valid, y, y_valid
 
 def test_data (general_embed_model, custom_embed_model, gold_series, gold_label_series):
-    """[summary]
+    """converts text (CoNLL formatted) and swaps out words for either w2v embeddings or
+    zeroes (OOV); does the same with a custom embeddings; concatenates; reshapes for 
+    entry to CNN and splits into train + valid
 
     Args:
-        general_embed_model ([type]): [description]
-        custom_embed_model ([type]): [description]
-        gold_series ([type]): [description]
-        gold_label_series ([type]): [description]
+        general_embed_model (embeddings model): Word2vec 300dim
+        custom_embed_model (embeddings model): Xu et al.'s in domain 100dim
+        gold_series ([Series]): df_test['word']
+        gold_label_series ([Series]): either df_test['label']
 
     Returns:
         [type]: [description]
@@ -107,21 +111,22 @@ def test_data (general_embed_model, custom_embed_model, gold_series, gold_label_
 
 def run_cnn (X_train, y_train, X_valid, y_valid, embedding_dims, batch_size,
              kernel_size, epochs, verbose = False):
-    """[summary]
+    """ runs Xu et al.'s Double Embedding with CNN model.
 
     Args:
-        X_train ([type]): [description]
-        y_train ([type]): [description]
-        X_valid ([type]): [description]
-        y_valid ([type]): [description]
-        embedding_dims ([type]): [description]
-        batch_size ([type]): [description]
-        kernel_size ([type]): [description]
-        epochs ([type]): [description]
-        verbose (bool, optional): [description]. Defaults to False.
+        X_train ([tensor]): concatenated embeddings, reshaped as 3-d tensors
+        y_train ([tensor]): concatenated embeddings, reshaped as 3-d tensors
+        X_valid ([tensor]): concatenated embeddings, reshaped as 3-d tensors
+        y_valid ([tensor]): concatenated embeddings, reshaped as 3-d tensors
+        embedding_dims (int): shape of X_train[2]
+        batch_size (int): batch size
+        kernel_size (int): kernel size
+        epochs (int): number of epochs
+        verbose (bool, optional): [prints out training accuracy and progress]. 
+        Defaults to False.
 
     Returns:
-        [type]: [description]
+        [model]: weights for prediction
     """
     model = Sequential()
     model.add(Conv1D(filters = 128, kernel_size = kernel_size,padding='same',
