@@ -556,10 +556,10 @@ def predict (df_test, system_predictions):
 
     gold_series = df_test.label.tolist()
     target_names = ['B','I','O']
-    print(classification_report(gold_series, system_predictions, target_names=target_names))
+    print('strict performance report', '\n', classification_report(gold_series, system_predictions, target_names=target_names))
     df_test['predicted'] = system_predictions
     df_test['gold_bi']= [label.replace ('B', 'I') for label in gold_series]
     df_test['predicted_bi']= df_test.predicted.replace({'B': 'I'})
     target_names = ['I','O']
-    print(classification_report(df_test.gold_bi, df_test.predicted_bi, target_names=target_names))
+    print('relaxed performance report', '\n', classification_report(df_test.gold_bi, df_test.predicted_bi, target_names=target_names))
 
