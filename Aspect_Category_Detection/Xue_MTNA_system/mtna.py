@@ -13,13 +13,14 @@ def main():
 
     prompt = "Please enter path to GloVe 200d embeddings: "
     path_to_glove = input(prompt)
+    print("Process takes at least 20 minutes. Please be patient.")
     embeddings_index = glove_loader (path_to_glove)
     embedding_matrix = substitue_embeddings(embeddings_index,t, vocab_size)
 
     df_train, df_test = populate_df_with_binary_cols_per_label(df_train, df_test)
 
     model = run_mtna(embedding_matrix, vocab_size)
-    predict(model, padded_docs, df_train)
+    predict(model, padded_docs, padded_test_docs, df_train, df_test)
 
 
 if __name__ == "__main__":
