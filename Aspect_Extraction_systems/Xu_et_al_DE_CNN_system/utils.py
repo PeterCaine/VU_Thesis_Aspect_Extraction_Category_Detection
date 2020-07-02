@@ -10,6 +10,15 @@ from sklearn.metrics import classification_report
 from sklearn.feature_extraction import DictVectorizer
 
 def load_test_train (path_train, path_test):
+    """loads CoNLL formatted SemEval 2014 data as dataframes
+
+    Args:
+        path_train (file): CoNLL formatted SemEval 2014 .tsv file
+        path_test (file): [CoNLL formatted SemEval 2014 .tsv file
+
+    Returns:
+        dataframe: SemEval 2014 as dataframes (1 test; 1 train)
+    """
     
     # load in CoNLL formatted restaurant tsv 
     df_train = pd.read_csv(path_train, sep = '\t')
@@ -31,6 +40,16 @@ def embed_swap (word_embedding_model, dataframe_series):
     return embeddings
 
 def load_embeddings (w2v_path, xuv_path):
+    """loads two embedding models into memory
+
+    Args:
+        w2v_path (string): path to Word2vec 300dim Google News word embeddings
+        xuv_path (string): path to Xu et al.'s 100dim custom trained restaurant 
+        embeddings
+
+    Returns:
+        2 embedding models: models are loaded into memory
+    """
     
     w2v = gensim.models.KeyedVectors.load_word2vec_format(w2v_path, binary=True)
     xuv = gensim.models.fasttext.load_facebook_model(xuv_path) 
@@ -144,7 +163,7 @@ def run_cnn (X_train, y_train, X_valid, y_valid, embedding_dims, batch_size,
     return model
 
 def predict (model, X_test, df_test, label_index):
-    """[summary]
+    """creates classification reports - strict (IOB) and relaxed (IO)
 
     Args:
         model ([type]): [description]
@@ -162,7 +181,7 @@ def predict (model, X_test, df_test, label_index):
     df_test['predicted'] = predictions
     target_names = ['B','I','O']
     print(classification_report(result.gold, df_test.predicted, target_names=target_names))
-    df_test['gold_bi']= result.gold.replace({'I': 'B'})
-    df_test['predicted_bi']= df_test.predicted.replace({'I': 'B'})
-    target_names = ['B','O']
+    df_test['gold_bi']= result.gold.replace({'B': 'I'})
+    df_test['predicted_bi']= df_test.predicted.replace({'B': 'I'})
+    target_names = ['I','O']
     print(classification_report(df_test.gold_bi, df_test.predicted_bi, target_names=target_names))
