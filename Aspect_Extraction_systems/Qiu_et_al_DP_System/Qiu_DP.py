@@ -1,9 +1,6 @@
 
 from utils import initialise_lexicon, test_set, algorithm, post_process, predict
 
-
-##########################################################################
-
 def main ():
     path_pos = '../../data/opinion-lexicon-English/positive-words.txt'
     path_neg = '../../data/opinion-lexicon-English/negative-words.txt'

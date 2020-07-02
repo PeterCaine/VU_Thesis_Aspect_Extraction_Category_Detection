@@ -51,8 +51,6 @@ def populate (df_lists,n):
     return word, deps, heads, lem_index, lemmas, upos
 
 def r1 (df_lists, O, F_dict):
-    
-    
     '''extracts new feature nouns (aspect targets)
     takes a lists extracted from dataframe for dependencies, heads, pos, and lemmas
     outputs set of extracted features (aspect terms) identified by deprel to known opinion adjectives
