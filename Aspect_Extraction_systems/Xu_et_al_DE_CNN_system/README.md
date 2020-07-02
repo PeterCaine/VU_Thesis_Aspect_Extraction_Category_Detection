@@ -11,3 +11,5 @@ You can download these at the following:
 
 You may also need to download and install fastText for the custom embeddings. This can be dowloaded at: 
 https://github.com/facebookresearch/fastText) to fastText/
+
+The notebook, DE_CNN_with_POS.ipynb, offers a proof of concept of the potential for the addition of pre-processed information (in this case xpos tags from Stanford CoreNLP, 'stanza' module.
