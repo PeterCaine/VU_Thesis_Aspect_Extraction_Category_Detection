@@ -164,7 +164,14 @@ def concat_dfs (df_test, df_new_test, df_train, df_new_train):
     return df_test, df_train
 
 def add_brown_clusters (path):
-    
+    """transforms brown cluster file into a dict of binary keys and word cluster values
+
+    Args:
+        path (string): path to brown cluster tweets
+
+    Returns:
+        dict: keys are binaries denoting clusters, values are words in clusters
+    """
     with open (path, 'r', encoding='utf-8') as infile:
         f = infile.readlines()
     split_f = [line.split('\t')[:2] for line in f]
@@ -198,6 +205,17 @@ def convert_to_array (one_hot_list):
     
 
 def n_gram_builder (df_train, df_test, training_array_clusters, test_array_clusters):
+    """constructs n-grams and char n-gram vectors and concatenates with stem and cluster information
+
+    Args:
+        df_train (dataframe): CoNLL formatted SemEval 2014 restaurant dataset
+        df_test (dataframe): CoNLL formatted SemEval 2014 restaurant dataset
+        training_array_clusters (vector): one hot represenation of texts according to occurence of words in brown clusters
+        test_array_clusters (vector): one hot represenation of texts according to occurence of words in brown clusters
+
+    Returns:
+        2 vectors: training vector and test vector encoded for entry into SVM 
+    """
     
     
     cv = CountVectorizer(min_df=2, ngram_range=(1, 2), stop_words='english')
@@ -227,6 +245,16 @@ def n_gram_builder (df_train, df_test, training_array_clusters, test_array_clust
     return X_train, y_train
 
 def populate_df_with_binary_cols_per_label (df_test, df_train):
+    """takes dataframe and adds 1 or 0 per row in label column depending on presence or not of a category 
+    in the review
+
+    Args:
+        df_test (dataframe): SemEval test data
+        df_train (dataframe): SemEval training data
+
+    Returns:
+        dataframe: updated with columns for category labels (either 1 or 0)
+    """
     
     df_test = df_test[['text', 'category0', 'category1','category2','category3']]
 
@@ -258,7 +286,14 @@ def populate_df_with_binary_cols_per_label (df_test, df_train):
     return df_train, df_test
 
 def predict (X_train, y_train, df_train, df_test):
-    
+    """prints the classification report for Xu et al.'s algorithm as implemented
+
+    Args:
+        X_train (vector): data encoded for entry into SVM
+        y_train (vector):  data encoded for entry into SVM 
+        df_train (dataframe): CoNLL formatted SemEval 2014 training dataset
+        df_test (dataframe): CoNLL formatted SemEval 2014 gold dataset
+    """
     svm_var = LinearSVC(random_state=4, tol=1e-5, max_iter=1500)
     
     svm_var.fit(X_train, df_train.cat_ambience.tolist())
