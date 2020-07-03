@@ -18,6 +18,7 @@ Minimally modified versions of 4 existing systems discovered in the literature (
 - a system based on Kirtichenko et al.'s SemEval 2014 entry (2014)
 - a system based on Xue et al.'s Multi Task Neural Approach system (2019)
 
+### Resources:
 The code and links to resources used are here for reference:
 Most of the code can be run from the terminal. Much of the data required is (temporarily) available in the data folder. This will be taken offline after review. 
 Links to the original data include:
