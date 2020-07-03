@@ -27,6 +27,7 @@ Links to the original data include:
 - Yelp Restaurant Word–Aspect Association Lexicon available at: http://www.saifmohammad.com/WebPages/lexicons.html
 - Hu and Liu (2004) seed opinion dataset: https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html
 
+## References:
 - S. Kiritchenko,  X. Zhu,  C. Cherry,  and S. Mohammad.  Nrc-canada-2014:  Detecting aspects and sentiment in customer reviews. In Proceedings  of  the  8th  international workshop on semantic evaluation (SemEval 2014), pages 437–442, 2014
 - G. Qiu,  B. Liu,  J. Bu,  and C. Chen.  Opinion word expansion and target extraction through double propagation. Computational linguistics, 37(1):9–27, 2011
 - H.  Xu,  B.  Liu,  L.  Shu,  and  P.  S.  Yu. Double  embeddings  and  cnn-based  sequence labeling for aspect extraction.arXiv preprint arXiv:1805.04601, 2018
