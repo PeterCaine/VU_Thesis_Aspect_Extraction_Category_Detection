@@ -100,7 +100,7 @@ def substitue_embeddings(embeddings_index, t, vocab_size):
     return embedding_matrix
     
 def populate_df_with_binary_cols_per_label (df_train, df_test):
-     """takes dataframe and adds 1 or 0 per row in label column depending on presence or not of a category 
+    """takes dataframe and adds 1 or 0 per row in label column depending on presence or not of a category 
     in the review
 
     Args:
