@@ -1,9 +1,6 @@
 # README
 This repo contains the code used for my thesis project at the VU (Vrije Universiteit - Amsterdam).
 
-## Thesis
-a copy of the thesis itself is available at https://www.overleaf.com/read/njddhvnzvfzs
-
 Aspect Based Sentiment Analysis is an approach to sentiment analysis which analyses texts at the word/token level in order to determine whether or not it is or forms part of a phrase which is the target of a subjective expression. According to the parameters laid down in SemEval 2014, there are 4 subtasks:
 - aspect extraction (AE)
 - aspect polarity classification
@@ -36,3 +33,6 @@ Links to the original data include:
 - G. Qiu,  B. Liu,  J. Bu,  and C. Chen.  Opinion word expansion and target extraction through double propagation. Computational linguistics, 37(1):9–27, 2011
 - H.  Xu,  B.  Liu,  L.  Shu,  and  P.  S.  Yu. Double  embeddings  and  cnn-based  sequence labeling for aspect extraction.arXiv preprint arXiv:1805.04601, 2018
 - W. Xue, W. Zhou, T. Li, and Q. Wang.  Mtna:  a neural multi-task model for aspect category classification and aspect term extraction on restaurant reviews. In Proceed-ings of the Eighth  International Joint Conference  on  Natural  Language Processing (Volume 2: Short Papers), pages 151–156, 2017.
+
+## Thesis
+a copy of the written part of the thesis is available at https://www.overleaf.com/read/njddhvnzvfzs
