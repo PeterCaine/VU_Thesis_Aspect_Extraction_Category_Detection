@@ -1,6 +1,9 @@
 # README
 This repo contains the code used for my thesis project at the VU (Vrije Universiteit - Amsterdam).
 
+## Thesis
+a copy of the thesis itself is available at https://www.overleaf.com/read/njddhvnzvfzs
+
 Aspect Based Sentiment Analysis is an approach to sentiment analysis which analyses texts at the word/token level in order to determine whether or not it is or forms part of a phrase which is the target of a subjective expression. According to the parameters laid down in SemEval 2014, there are 4 subtasks:
 - aspect extraction (AE)
 - aspect polarity classification
