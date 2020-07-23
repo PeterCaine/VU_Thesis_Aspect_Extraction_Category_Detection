@@ -35,4 +35,4 @@ Links to the original data include:
 - W. Xue, W. Zhou, T. Li, and Q. Wang.  Mtna:  a neural multi-task model for aspect category classification and aspect term extraction on restaurant reviews. In Proceed-ings of the Eighth  International Joint Conference  on  Natural  Language Processing (Volume 2: Short Papers), pages 151–156, 2017.
 
 ## Thesis
-A copy of the written part of the thesis is available at https://www.overleaf.com/read/njddhvnzvfzs
+A copy of the written part of the thesis is available at https://drive.google.com/file/d/1H6J-xjIpfON7RONbibCatuo-sYHsBzhN/view?usp=sharing
