@@ -10,7 +10,7 @@ google-pasta==0.2.0
 grpcio==1.30.0
 h5py==2.10.0
 idna==2.10
-joblib==0.16.0
+joblib==1.2.0
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
 Markdown==3.2.2
